@@ -48,7 +48,7 @@ For testing and demonstration purposes, a default administrator account is creat
 * **Password**: `123`
 
 ##  API Documentation & Testing
-A complete Postman collection is included in the project root directory: `Final Project_LMS.postman_collection.json`.
+A complete Postman collection is included in the project root directory: `Final Project.postman_collection.json`.
 
 **The Postman collection includes:**
 * Pre-configured requests for **ADMIN**, **TEACHER**, and **STUDENT** roles.
