@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="1" author="student">
+        <createTable tableName="t_roles">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+        <insert tableName="t_roles"><column name="name" value="ROLE_ADMIN"/></insert>
+        <insert tableName="t_roles"><column name="name" value="ROLE_USER"/></insert>
+        <insert tableName="t_roles"><column name="name" value="ROLE_TEACHER"/></insert>
+
+        <createTable tableName="t_users">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="email" type="VARCHAR(255)"><constraints unique="true"/></column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="full_name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="t_users_roles">
+            <column name="user_id" type="BIGINT"/>
+            <column name="roles_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="t_users_roles" baseColumnNames="user_id" referencedTableName="t_users" referencedColumnNames="id" constraintName="fk_u_r_u"/>
+        <addForeignKeyConstraint baseTableName="t_users_roles" baseColumnNames="roles_id" referencedTableName="t_roles" referencedColumnNames="id" constraintName="fk_u_r_r"/>
+
+        <createTable tableName="t_courses">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="price" type="INT"/>
+            <column name="author_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="t_courses" baseColumnNames="author_id" referencedTableName="t_users" referencedColumnNames="id" constraintName="fk_course_author"/>
+
+        <createTable tableName="t_lessons">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="content" type="TEXT"/>
+            <column name="course_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="t_lessons" baseColumnNames="course_id" referencedTableName="t_courses" referencedColumnNames="id" constraintName="fk_lesson_course"/>
+
+        <createTable tableName="t_assignments">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="task_name" type="VARCHAR(255)"/>
+            <column name="max_score" type="INT"/>
+            <column name="lesson_id" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="t_assignments" baseColumnNames="lesson_id" referencedTableName="t_lessons" referencedColumnNames="id" constraintName="fk_assignment_lesson"/>
+    </changeSet>
+
+    <changeSet id="2" author="student">
+        <createTable tableName="t_submissions">
+            <column name="id" type="BIGINT" autoIncrement="true"><constraints primaryKey="true"/></column>
+            <column name="student_answer" type="TEXT"/>
+            <column name="grade" type="INT"/>
+            <column name="is_graded" type="BOOLEAN" defaultValueBoolean="false"/>
+            <column name="assignment_id" type="BIGINT"/>
+            <column name="student_id" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="t_submissions" baseColumnNames="assignment_id" referencedTableName="t_assignments" referencedColumnNames="id" constraintName="fk_submission_assignment"/>
+        <addForeignKeyConstraint baseTableName="t_submissions" baseColumnNames="student_id" referencedTableName="t_users" referencedColumnNames="id" constraintName="fk_submission_student"/>
+    </changeSet>
+
+</databaseChangeLog>
