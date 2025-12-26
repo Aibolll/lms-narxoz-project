@@ -1,60 +1,75 @@
-# 🎓 Learning Management System (LMS)
-Narxoz University Edition
+#  Learning Management System (LMS)
+### Narxoz University Edition
 
-A backend Learning Management System developed as a final project for Narxoz University.
-The system automates academic workflows and manages interactions between administrators,
-teachers, and students using a secure role-based architecture.
+A backend Learning Management System developed as a final project for Final Project. The system automates academic workflows and manages interactions between administrators, teachers, and students using a secure role-based architecture.
 
-Learning Management System (LMS) — Narxoz University Edition
+##  Features
+* **User registration and authentication**
+* **Role-based access control** (ADMIN, TEACHER, STUDENT)
+* **Course creation and management**
+* **Student enrollment**
+* **Grading and evaluation system**
+* **Secure REST API**
 
-Username: sergeant@narxoz.kz
+##  Architecture
+The application follows a **Layered Architecture** pattern to ensure clean separation of concerns, scalability, and maintainability.
 
-Password: 123
+**Application layers:**
+* **Controller Layer** — handles HTTP requests and input validation.
+* **Service Layer** — contains business logic and system rules.
+* **Repository Layer** — manages database access using Spring Data JPA.
+* **Security Layer** — provides role-based access control using Spring Security.
 
-The admin user is initialized via the AdminSeeder class.
 
-API Documentation & Testing (Postman)
 
-A complete Postman collection is included in the project root directory:
+##  Getting Started
 
-Final_Project_LMS.postman_collection.json
+### Prerequisites
+* **Java 17** or higher
+* **PostgreSQL** (running locally)
+* **IntelliJ IDEA** (recommended)
 
-The collection contains:
+### Database Setup
+1. Create an empty PostgreSQL database named: `final_db`
+2. Configure your database credentials in: `src/main/resources/application.properties`
 
-Pre-configured requests for all user roles (ADMIN, TEACHER, STUDENT)
+### Database Migrations
+**Liquibase** is used for database version control. On the first application startup, Liquibase automatically:
+* Creates all required tables.
+* Applies relationships and constraints.
+* Initializes default roles.
 
-Endpoints for registration, profile management, courses, and grading
+### Running the Application
+Run the application from the project root directory using Gradle. After successful startup, the backend server will be available for API testing.
 
-Saved DTO response examples with real-world data structures
+##  Default Admin Account
+For testing and demonstration purposes, a default administrator account is created on application startup via the `AdminSeeder` class.
+* **Username**: `sergeant@narxoz.kz`
+* **Password**: `123`
 
-Pre-set Basic Authentication headers for instant testing
+##  API Documentation & Testing
+A complete Postman collection is included in the project root directory: `Final Project_LMS.postman_collection.json`.
 
-The Postman collection is recommended for API testing and project defense.
+**The Postman collection includes:**
+* Pre-configured requests for **ADMIN**, **TEACHER**, and **STUDENT** roles.
+* Authentication and registration endpoints.
+* Course and grading management endpoints.
+* **Saved DTO response examples** with real-world data structures.
+* Pre-set **Basic Authentication** headers for instant testing.
 
-Technology Stack
+##  Technology Stack
+* **Backend Framework**: Java 17, Spring Boot 3
+* **Security**: Spring Security (Role-Based Access Control)
+* **Data Access**: Spring Data JPA / Hibernate
+* **Database**: PostgreSQL
+* **Migrations**: Liquibase
+* **Testing**: JUnit 5, Mockito
+* **API Testing**: Postman
 
-Backend Framework: Java 17, Spring Boot 3
-
-Security: Spring Security (Role-Based Access Control)
-
-Data Access: Spring Data JPA / Hibernate
-
-Database: PostgreSQL
-
-Migrations: Liquibase
-
-Testing: JUnit 5, Mockito
-
-API Documentation & Testing: Postman Collections
-
-Project Purpose
-
+##  Project Purpose
 The purpose of this project is to demonstrate:
-
-Practical usage of Spring Boot and layered architecture
-
-Secure REST API development with role-based access control
-
-Integration with PostgreSQL and Liquibase
-
-Backend development of an educational platform
+* Backend development using Spring Boot.
+* Clean layered architecture design.
+* Secure REST API implementation.
+* Role-based authorization.
+* Integration with PostgreSQL and Liquibase.
