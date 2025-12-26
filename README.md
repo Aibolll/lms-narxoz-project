@@ -1,3 +1,10 @@
+# 🎓 Learning Management System (LMS)
+Narxoz University Edition
+
+A backend Learning Management System developed as a final project for Narxoz University.
+The system automates academic workflows and manages interactions between administrators,
+teachers, and students using a secure role-based architecture.
+
 Learning Management System (LMS) — Narxoz University Edition
 
 Username: sergeant@narxoz.kz
