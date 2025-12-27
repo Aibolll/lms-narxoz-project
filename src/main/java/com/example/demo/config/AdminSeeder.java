@@ -25,7 +25,6 @@ public class AdminSeeder implements CommandLineRunner {
         Role adminRole = roleRepository.findByName("ROLE_ADMIN");
 
         if (user != null && adminRole != null) {
-            // Принудительно ставим пароль "123"
             user.setPassword(passwordEncoder.encode("123"));
             user.setRoles(Collections.singletonList(adminRole));
             userRepository.save(user);
