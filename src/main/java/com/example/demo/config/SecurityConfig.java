@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer; // <--- Не забудьте этот импорт
+import org.springframework.security.config.Customizer; 
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -50,12 +50,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // Разрешаем всем доступ к папке /auth (регистрация)
                         .requestMatchers("/auth/**").permitAll()
-                        // Все остальные запросы требуют входа
                         .anyRequest().authenticated()
                 )
-                // Включаем Basic Auth (для тестирования через Postman)
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
