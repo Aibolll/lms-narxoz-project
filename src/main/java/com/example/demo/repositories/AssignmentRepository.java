@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AssignmentRepository extends JpaRepository<Assignment, Long> {
-    List<Assignment> findAllByLessonId(Long lessonId); // <--- Добавляем поиск по ID урока
-}
+    List<Assignment> findAllByLessonId(Long lessonId); 
